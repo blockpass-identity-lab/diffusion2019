@@ -61,7 +61,8 @@ else
 fi
 
 if [ -z "${PWD_HOST_FQDN}" ]; then
-	DOCKERHOST=`docker run --rm --net=host codenvy/che-ip`
+  MY_HOST=`ifconfig en0 | awk 'FNR == 5  {print $2}'`
+	DOCKERHOST="${MY_HOST}"
     export RUNMODE="docker"
 else
 	PWD_HOST="${PWD_HOST_FQDN}"
